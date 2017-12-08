@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "stdio.h": "c",
+    "adlist.h": "c",
+    "stdlib.h": "c",
+    "zmalloc.h": "c"
+  },
+  "editor.tabSize": 4,
+  "editor.spaceSize": 4
+}
