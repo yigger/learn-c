@@ -3,40 +3,35 @@
 #include "../common/zmalloc.h"
 #include "adlist.h"
 
-list *listCreate(void) {
+list *listCreate() {
 	list *list;
-	if((list = zmalloc(sizeof(list))) == NULL) {
+	if((list = (struct list*)zmalloc(sizeof(list))) == NULL) {
+		printf("error ");
+		exit(0);
 		return NULL;
 	}
-
-	list->head = NULL;
-	list->tail = NULL;
+	list->head = list->tail = NULL;
 	list->len = 0;
-	list->dup = NULL;
-	list->free = NULL;
-	list->match = NULL;
 	return list;
 }
 
 list *listAddNodeHead(list *list, void *value) {
-	listNode *node;
-	if((node = zmalloc(sizeof(*node))) == NULL) {
-		return NULL;
-	}
+    listNode *node;
 
-	node->value = value;
+    if ((node = (struct listNode*)zmalloc(sizeof(*node))) == NULL)
+        return NULL;
 
-	if (list->len == 0) {
-		node->prev = node->next = NULL;
-		list->head = list->tail = node;
-	} else {
-		node->next = list->head;
-		list->head->prev = node;
-		list->head = node;
-		node->prev = NULL;
-	}
-
-	list->len ++;
-	return list;
+    node->value = value;
+    if (list->len == 0) {
+        list->head = list->tail = node;
+        node->prev = node->next = NULL;
+    } else {
+        node->prev = NULL;
+        node->next = list->head;
+        list->head->prev = node;
+        list->head = node;
+    }
+    list->len++;
+    return list;
 }
 

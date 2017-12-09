@@ -7,9 +7,6 @@ typedef struct listNode {
 typedef struct list {
     listNode *head;
     listNode *tail;
-    void *(*dup)(void *ptr);
-    void (*free)(void *ptr);
-    int (*match)(void *ptr, void *key);
     unsigned long len;
 } list;
 
@@ -21,4 +18,3 @@ typedef struct list {
 /* Prototypes */
 list *listCreate(void);
 list *listAddNodeHead(list *list, void *value);
-list *listAddNodeTail(list *list, void *value);
