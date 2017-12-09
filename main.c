@@ -3,15 +3,21 @@
 #include "link/adlist.h"
 
 int main() {
-		list *list;
-		printf("Start to create list\n");
-		list = listCreate();
-		printf("Len = %d\n", (int)listLength(list));
+	list *list;
+	printf("Start to create list\n");
+	list = listCreate();
+	// insert a value to list head
+	list = listAddNodeHead(list, "cccb");
+	printf("%s\n", (char *)list->head->value);
 
-		/*list = listAddNodeHead(list, "cccb");
-		printf("create over\n");
-		printf("result = %s \n", list->head->value);
-		*/
-		free(list);
-		return 0;
+	// output list len
+	printf("Len = %d\n", (int)listLength(list));
+
+	// insert a value to tail
+	list = listAddNodeTail(list, "ab");
+	// printf("%s \n", (char*)list->tail->value);
+
+	printf("%s\n", (char *)listNodeValue(list->tail));
+
+	return 0;
 }
