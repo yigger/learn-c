@@ -5,23 +5,22 @@
 
 list *listCreate() {
 	list *list;
-	if((list = (struct list*)zmalloc(sizeof(list))) == NULL) {
-		printf("error ");
-		exit(0);
+	if((list = zmalloc(sizeof(*list))) == NULL)
 		return NULL;
-	}
+	
 	list->head = list->tail = NULL;
+    list->len = 0;
     list->free = NULL;
     list->dup = NULL;
     list->match = NULL;
-	list->len = 0;
+	
 	return list;
 }
 
 list *listAddNodeHead(list *list, void *value) {
     listNode *node;
 
-    if ((node = (struct listNode*)zmalloc(sizeof(*node))) == NULL)
+    if ((node = zmalloc(sizeof(*node))) == NULL) 
         return NULL;
 
     node->value = value;
@@ -40,7 +39,7 @@ list *listAddNodeHead(list *list, void *value) {
 
 list *listAddNodeTail(list *list, void *value) {
     listNode *node;
-    if((node = (struct listNode *)zmalloc(sizeof(*node))) == NULL) 
+    if((node = zmalloc(sizeof(*node))) == NULL) 
         return NULL;
     
     node->value = value;
@@ -60,7 +59,7 @@ list *listAddNodeTail(list *list, void *value) {
 
 list *listInsertNode(list *list, listNode *old_node, void *value, int after) {
     listNode *node;
-    if((node = (struct listNode *)zmalloc(sizeof(listNode*))) == NULL) {
+    if((node = zmalloc(sizeof(listNode*))) == NULL) {
         return NULL;
     }
 
@@ -133,4 +132,37 @@ listNode *listNext(listIter *iter) {
         }
     }
     return current_node;
+}
+
+void listDelNode(list *list, listNode *node) {
+    if(node->prev) {
+        node->prev->next = node->next;
+    } else {
+        list->head = node->next;
+    } 
+
+    if(node->next) {
+        node->next->prev = node->prev;
+    } else {
+        list->tail = node->prev;
+    }
+    if(list->free) list->free(node->value);
+    zfree(node);
+    list->len--;
+}
+
+void printList(list *list) {
+    if(list->head != NULL) {
+        listNode *node;
+        node = list->head;
+        printf("Len = %d..\t", (int)listLength(list));
+        while(node != NULL) {
+            printf("%s", (char*)listNodeValue(node));
+            if(node->next != NULL) {
+                printf(" -> ");
+            }
+            node = node->next;
+        }
+        printf("\n");
+    }
 }

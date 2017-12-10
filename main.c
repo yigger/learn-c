@@ -6,18 +6,31 @@ int main() {
 	list *list;
 	printf("Start to create list\n");
 	list = listCreate();
-	// insert a value to list head
+
 	list = listAddNodeHead(list, "cccb");
-	printf("%s\n", (char *)list->head->value);
+	printList(list);
 
-	// output list len
-	printf("Len = %d\n", (int)listLength(list));
-
-	// insert a value to tail
 	list = listAddNodeTail(list, "ab");
-	// printf("%s \n", (char*)list->tail->value);
+	printList(list);
+	
+	listInsertNode(list, list->head, "test", AL_START_HEAD);
+	printList(list);
 
-	printf("%s\n", (char *)listNodeValue(list->tail));
+	listInsertNode(list, list->head, "addToTail", AL_START_TAIL);
+	printList(list);
+
+	listNode *searchNode;
+	searchNode = listSearchKey(list, "addToTail");
+	if(searchNode != NULL) {
+		listInsertNode(list, searchNode, "afterInsertValue", AL_START_TAIL);
+		printList(list);
+	} else {
+		printf("can't search node\n");
+	}
+	
+	listDelNode(list, searchNode);
+	printList(list);
+
 
 	return 0;
 }

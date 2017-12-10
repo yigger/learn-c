@@ -40,7 +40,10 @@ listNode *listSearchKey(list *list, void *key);
 void listRewind(list *list, listIter *li);
 void listRewindTail(list *list, listIter *li);
 listNode *listNext(listIter *iter);
+void listDelNode(list *list, listNode *node);
 
+/* Test */
+void printList(list *list);
 
 /* Directions for iterators */
 #define AL_START_HEAD 0
