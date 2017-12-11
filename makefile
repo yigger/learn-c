@@ -1,7 +1,7 @@
 cc = gcc
-prom = list
-deps = common/zmalloc.h link/adlist.h
-obj = main.o common/zmalloc.o link/adlist.o
+prom = learn
+deps = src/zmalloc.h src/adlist.h
+obj = main.o src/zmalloc.o src/adlist.o
 
 $(prom): $(obj)
 	@$(cc) -o $(prom) $(obj)

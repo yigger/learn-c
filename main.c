@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "link/adlist.h"
+#include "src/adlist.h"
 
 int main() {
 	list *list;

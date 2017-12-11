@@ -1,3 +1,5 @@
+#ifndef __ADLIST_H
+#define __ADLIST_H
 typedef struct listNode {
     struct listNode *prev;
     struct listNode *next;
@@ -48,3 +50,5 @@ void printList(list *list);
 /* Directions for iterators */
 #define AL_START_HEAD 0
 #define AL_START_TAIL 1
+
+#endif

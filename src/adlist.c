@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../common/zmalloc.h"
+#include "zmalloc.h"
 #include "adlist.h"
 
 list *listCreate() {
