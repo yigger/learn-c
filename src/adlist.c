@@ -5,21 +5,21 @@
 
 list *listCreate() {
 	list *list;
-	if((list = zmalloc(sizeof(*list))) == NULL)
-		return NULL;
-	
+	if((list = zmalloc(sizeof(*list))) == NULL) {
+        return NULL;
+    }
+    
 	list->head = list->tail = NULL;
     list->len = 0;
     list->free = NULL;
     list->dup = NULL;
     list->match = NULL;
-	
+    
 	return list;
 }
 
 list *listAddNodeHead(list *list, void *value) {
     listNode *node;
-
     if ((node = zmalloc(sizeof(*node))) == NULL) 
         return NULL;
 
@@ -33,6 +33,7 @@ list *listAddNodeHead(list *list, void *value) {
         list->head->prev = node;
         list->head = node;
     }
+
     list->len++;
     return list;
 }
