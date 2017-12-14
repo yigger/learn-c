@@ -12,7 +12,7 @@ typedef struct sdshdr {
     int len;
     int free;
     char buf[];
-};
+} sdshdr;
 
 sds sdsnewlen(const void *init, size_t initlen);
 sds sdsnew(const char *init);

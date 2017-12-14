@@ -16,10 +16,16 @@ sds sdsnewlen(const void *init, size_t initlen) {
     sh->len = initlen;
     sh->free = 0;
     
-    if(initlen && init)
+    if(initlen && init) {
+        //从源src所指的内存地址的起始位置开始拷贝n个字节到目标dest所指的内存地址的起始位置中
         memcpy(sh->buf, init, initlen);
-    
+    }
     sh->buf[initlen] = '\0';
 
     return (char*)sh->buf;
+}
+
+sds sdsnew(const char *init) {
+    size_t initlen = (init == NULL) ? 0 : strlen(init);
+    return sdsnewlen(init, initlen);
 }

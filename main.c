@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "src/adlist.h"
+#include "src/sds.h"
 
 int main() {
 	list *list;
-	printf("Start to create list\n");
+
+	/*
+	此部分是测试双向无环链表
+	*/
+	printf("Start to test adlist\n");
 	list = listCreate();
 
 	list = listAddNodeHead(list, "cccb");
@@ -31,6 +36,11 @@ int main() {
 	listDelNode(list, searchNode);
 	printList(list);
 
+	/**
+	 * 测试字符串
+	*/
+	char a[3] = "abc";
+	printf("%s", sdsnewlen(a, 5));
 
 	return 0;
 }
