@@ -39,8 +39,18 @@ int main() {
 	/**
 	 * 测试字符串
 	*/
-	char a[3] = "abc";
-	printf("%s", sdsnewlen(a, 5));
+    char a[3] = "abc";
+    sds sds1 = sdsnewlen(a, 5);
+	printf("%s", sds1);
+
+    char test[] = "abbb c";
+    printf("大小： %d\n", sdslen(sdsnew(test)));
+
+    sdsfree(sds1);
+    printf("after free: %s\n", sds1);
+
+    sds dupstr = sdsdup(test);
+    printf("copy test str: %s \n", dupstr);
 
 	return 0;
 }

@@ -14,8 +14,25 @@ typedef struct sdshdr {
     char buf[];
 } sdshdr;
 
+static inline size_t sdslen(const sds s) {
+    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
+    return sh->len;
+}
+
+static inline size_t sdsavail(const sds s) {
+    struct sdshdr *sh = (void*)(s-(sizeof(struct sdshdr)));
+    return sh->free;
+}
+
 sds sdsnewlen(const void *init, size_t initlen);
 sds sdsnew(const char *init);
 sds sdsempty(void);
+sds sdsdup(const sds s);
+void sdsfree(sds s);
+void sdsclear(sds s);
+size_t sdsavail(const sds s);
+sds sdsgrowzero(sds s, size_t len);
+
+sds sdsMakeRoomFor(sds s, size_t addlen);
 
 #endif
