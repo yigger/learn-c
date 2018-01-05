@@ -1,7 +1,7 @@
 cc = gcc
 prom = learn
-deps = src/zmalloc.h src/adlist.h src/sds.h
-obj = main.o src/zmalloc.o src/adlist.o src/sds.o
+deps = src/zmalloc.h src/adlist.h src/sds.h src/dict.h
+obj = main.o src/zmalloc.o src/adlist.o src/sds.o src/dict.o
 
 $(prom): $(obj)
 	@$(cc) -o $(prom) $(obj)

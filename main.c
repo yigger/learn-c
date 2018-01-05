@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "src/adlist.h"
 #include "src/sds.h"
-
+#include "src/dict.h"
 int main() {
 	list *list;
 
@@ -44,13 +44,19 @@ int main() {
 	printf("%s", sds1);
 
     char test[] = "abbb c";
-    printf("大小： %d\n", sdslen(sdsnew(test)));
+    // printf("大小： %d\n", sdslen(sdsnew(test)));
 
     sdsfree(sds1);
     printf("after free: %s\n", sds1);
 
     sds dupstr = sdsdup(test);
     printf("copy test str: %s \n", dupstr);
+
+	/**
+	 * 字典
+	*/ 
+	dict *dt = dictCreate(NULL, NULL);
+	
 
 	return 0;
 }
