@@ -7,7 +7,7 @@
 #define FALSE 0
 
 typedef struct skipNode {
-  unsigned long val;
+  int val;
   struct skipNode *next;
   struct skipNode *down;
 } skipnode;
@@ -41,7 +41,26 @@ int randowlevel () {
   return k >= MAX_LEVEL ? MAX_LEVEL : k;
 }
 
-int insertNode () {
+int insertNode (skipList *skiplist, int value) {
+  // int level = randowlevel();
+  int randHeight = 3;
+  int level = skiplist->level;
+  int size = skiplist->level;
+  int j = 0;
+  skipnode *node = skiplist->head;
+  int p[j];
+
+  while(node) {
+    while(node) {
+      if(node->val < value) {
+        p[j] = node;
+        j++;
+        break;
+      } 
+      node = node->next;
+    }
+    node = node->down;
+  }
 
   
 
@@ -51,7 +70,7 @@ int insertNode () {
 int main() {
   skipList *skiplist;
   skiplist = createSkipList();
-  int level = randowlevel();
-  printf("%d", level);
+  insertNode(skiplist, 1);
+  // insertNode(skiplist, 5);
   return 0;
 }
